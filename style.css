@@ -1,0 +1,13 @@
+.aulaform {
+    width: 350px;
+    padding: 15px;;
+}
+
+
+.Sensor {
+    background-color: #93baff;
+}
+
+.Actuator {
+    background-color: #ffbf6c;
+}
