@@ -1,15 +1,23 @@
-<?php 
+<?php //user authentication -> block acces and redirect if not logged in
   session_start();
   if(!isset($_SESSION['username'])){
     header("refresh:5;url=index.php");
     die("Acesso Restrito");
   }
 ?>
+<?php
+//block that allows to read contents ffrom the temperature api files
+ 
+$temperature_value = file_get_contents("api/files/temperature/value.txt");
+$temperature_time = file_get_contents("api/files/temperature/time.txt");
+$temperature_name = file_get_contents("api/files/temperature/name.txt");
+?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="5">
     <title>IoT Platform</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -41,13 +49,13 @@
             <div class="col-sm">
                 <div class="card text-center">
                     <div class="card-header Sensor">
-                        Temperature: 60°C
+                        Temperature: <?php echo $temperature_value; ?> °C
                     </div>
                     <div class="card-body">
                         <img src="img/temperature-high.png" alt="Sensor 2 Image" class="img-fluid">
                     </div>
                     <div class="card-footer">
-                        Last update: 2025-03-12 10:00 AM
+                        Last update: <?php echo $temperature_time; ?>
                         <br>
                         <a href="#">View History</a>
                     </div>
@@ -102,9 +110,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Temperature</td>
-                                <td>40°C</td>
-                                <td>2025-03-12 10:00 AM</td>
+                                <td><?php echo $temperature_name?> </td>
+                                <td><?php echo $temperature_value?></td>
+                                <td><?php echo $temperature_time?></td>
                                 <td><span class="badge rounded-pill text-bg-danger">Danger</span></td>
                             </tr>
                             <tr>
