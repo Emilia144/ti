@@ -11,3 +11,12 @@
 .Actuator {
     background-color: #ffbf6c;
 }
+
+body {
+    background-image: url('img/city_pic.png'); /* Replace with your PNG file path */
+    background-size: 100% auto; /* Scales with screen width */
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: scroll; /* allows the page to scroll normally */
+    min-height: 200vh; /* Example height to allow scrolling */
+}
