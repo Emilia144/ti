@@ -14,6 +14,14 @@ require_once 'credentials.php'; // Include the credentials file
            
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <style>
+        body {
+        background-image: url('img/city_pic.png'); /* Replace with your PNG file path */
+        background-size: 100% auto; /* Scales with screen width */
+        background-position: top center;
+  
+}
+    </style>
 </head>
 <body>
 
@@ -23,7 +31,7 @@ require_once 'credentials.php'; // Include the credentials file
             <form class="aulaform was-validated"method="post" action="index.php">
                 
                 <div class="mb-3">
-                    <label for="InputUsername" class="form-label"></label>
+                    <label for="InputUsername" class="frm-label"></label>
                     <input type="username" class="form-control" id="InputUsername" name="username" placeholder="Username" required>
                 </div>
                 <div class="mb-3">
