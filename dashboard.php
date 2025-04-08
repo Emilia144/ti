@@ -9,14 +9,14 @@
 
 <?php 
 function sensorinfo($name, $type) {
-    echo file_get_contents("api/files/$name/$type.txt");
+    return file_get_contents("api/files/$name/$type.txt");
 }
 ?>
 <?php
 function renderSensorCard($sensorName) {
-    $value = file_get_contents("api/files/$sensorName/value.txt");
-    $time = file_get_contents("api/files/$sensorName/time.txt");
-    $label = ucfirst($sensorName); // z.B. "humidity" -> "Humidity"
+    $value = sensorinfo($sensorName, 'value');
+    $time = sensorinfo($sensorName, 'time');
+    $label = sensorinfo($sensorName, 'name');  
 
     echo '
     <div class="col-md-6">
@@ -45,9 +45,9 @@ function renderSensorCard($sensorName) {
 ?>
 <?php
 function renderActuatorCard($actuatorName) {
-    $value = file_get_contents("api/files/$actuatorName/value.txt");
-    $time = file_get_contents("api/files/$actuatorName/time.txt");
-    $label = ucfirst($actuatorName); // z.B. "humidity" -> "Humidity"
+  $value = sensorinfo($actuatorName, 'value');
+  $time = sensorinfo($actuatorName, 'time');
+  $label = sensorinfo($actuatorName, 'name');  
 
     echo '
     <div class="col-md-6">
@@ -58,7 +58,7 @@ function renderActuatorCard($actuatorName) {
                 <br>
                 <div class="mb-1 text-body-secondary">Last update:</div>
                 <p class="card-text mb-auto">'.htmlspecialchars($time).'</p>
-                <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                <a href="history.php?name='.urlencode($actuatorName).'" class="icon-link gap-1 icon-link-hover stretched-link">
                     view history
                     <svg class="bi" aria-hidden="true"><use xlink:href="#chevron-right"/></svg>
                 </a>
