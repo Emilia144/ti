@@ -7,6 +7,11 @@
   $username = $_SESSION['username'];
 ?>
 
+<?php 
+function sensorinfo($name, $type) {
+    echo file_get_contents("api/files/$name/$type.txt");
+}
+?>
 <?php
 function renderSensorCard($sensorName) {
     $value = file_get_contents("api/files/$sensorName/value.txt");
@@ -106,73 +111,19 @@ function renderActuatorCard($actuatorName) {
     <div class="content container">
     <div class="row mb-2">
       <?php renderSensorCard('humidity'); ?>
-      <?php // renderActuatorCard('irrigationsystem'); ?>
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-success-emphasis">Actuator</strong>
-            <h3 class="mb-0">Irrigation System</h3>
-            <br>
-            <div class="mb-1 text-body-secondary">Last update</div>
-            <p class="mb-auto">date.</p>
-            <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-              view history
-              <svg class="bi" aria-hidden="true"><use xlink:href="#chevron-right"/></svg>
-            </a>
-          </div>
-          <div class="col-auto d-none d-lg-block">
-            <svg class="bd-placeholder-img" width="200" height="215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-          </div>
-        </div>
-      </div>
+      <?php renderActuatorCard('irrigationsystem'); ?>      
     </div>
 
 
     <div class="row mb-2">
-    <?php renderSensorCard('light'); ?>
-    <?php // renderActuatorCard('streetlights'); ?>
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-success-emphasis">Actuator</strong>
-            <h3 class="mb-0">Street Lights</h3>
-            <br>
-            <div class="mb-1 text-body-secondary">Last Update</div>
-            <p class="mb-auto">date.</p>
-            <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-              view history
-              <svg class="bi" aria-hidden="true"><use xlink:href="#chevron-right"/></svg>
-            </a>
-          </div>
-          <div class="col-auto d-none d-lg-block">
-            <svg class="bd-placeholder-img" width="200" height="215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-          </div>
-        </div>
-      </div>
+      <?php renderSensorCard('light'); ?>
+      <?php renderActuatorCard('streetlights'); ?>      
     </div>
 
 
     <div class="row mb-2">
-    <?php renderSensorCard('airquality'); ?>
-    <?php // renderActuatorCard('warningsystem'); ?>
-      <div class="col-md-6">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-          <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-success-emphasis">Actuator</strong>
-            <h3 class="mb-0">Warning System</h3>
-            <br>
-            <div class="mb-1 text-body-secondary">Last updated</div>
-            <p class="mb-auto">date.</p>
-            <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-              view history
-              <svg class="bi" aria-hidden="true"><use xlink:href="#chevron-right"/></svg>
-            </a>
-          </div>
-          <div class="col-auto d-none d-lg-block">
-            <svg class="bd-placeholder-img" width="200" height="215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-          </div>
-        </div>
-      </div>
+      <?php renderSensorCard('airquality'); ?>
+      <?php renderActuatorCard('warningsystem'); ?>
     </div>
   </div>
 
@@ -197,21 +148,21 @@ function renderActuatorCard($actuatorName) {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><?php echo $temperature_name?> </td>
-                                <td><?php echo $temperature_value?></td>
-                                <td><?php echo $temperature_time?></td>
+                                <td><?php echo sensorinfo('light', 'name')?> </td>
+                                <td><?php echo sensorinfo('light', 'value')?></td>
+                                <td><?php echo sensorinfo('light', 'time')?></td>
                                 <td><span class="badge rounded-pill text-bg-danger">Danger</span></td>
                             </tr>
                             <tr>
-                                <td>Humidity</td>
-                                <td>70%</td>
-                                <td>2025-03-12 10:00 AM</td>
+                                <td><?php echo sensorinfo('humidity', 'name')?> </td>
+                                <td><?php echo sensorinfo('humidity', 'value')?></td>
+                                <td><?php echo sensorinfo('humidity', 'time')?></td>
                                 <td><span class="badge rounded-pill text-bg-primary">Normal</span></td>
                             </tr>
                             <tr>
-                                <td>LED Arduino</td>
-                                <td>Light on</td>
-                                <td>2025-03-12 10:00 AM</td>
+                                <td><?php echo sensorinfo('airquality', 'name')?> </td>
+                                <td><?php echo sensorinfo('airquality', 'value')?></td>
+                                <td><?php echo sensorinfo('airquality', 'time')?></td>
                                 <td><span class="badge rounded-pill text-bg-success">Active</span></td>
                             </tr>
                         </tbody>
