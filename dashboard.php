@@ -57,7 +57,8 @@ $temperature_name = file_get_contents("api/files/temperature/name.txt");
                     <div class="card-footer">
                         Last update: <?php echo $temperature_time; ?>
                         <br>
-                        <a href="#">View History</a>
+                        <a href="history.php?name=temperature">View History</a>
+
                     </div>
                 </div>
             </div>
