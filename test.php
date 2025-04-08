@@ -106,7 +106,6 @@ function renderActuatorCard($actuatorName) {
     <div class="content container">
     <div class="row mb-2">
       <?php renderSensorCard('humidity'); ?>
-      <?php // renderActuatorCard('irrigationsystem'); ?>
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col p-4 d-flex flex-column position-static">
@@ -130,7 +129,6 @@ function renderActuatorCard($actuatorName) {
 
     <div class="row mb-2">
     <?php renderSensorCard('light'); ?>
-    <?php // renderActuatorCard('streetlights'); ?>
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col p-4 d-flex flex-column position-static">
@@ -154,7 +152,6 @@ function renderActuatorCard($actuatorName) {
 
     <div class="row mb-2">
     <?php renderSensorCard('airquality'); ?>
-    <?php // renderActuatorCard('warningsystem'); ?>
       <div class="col-md-6">
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
           <div class="col p-4 d-flex flex-column position-static">
