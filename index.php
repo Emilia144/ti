@@ -1,8 +1,26 @@
-
 <?php 
 session_start();
 require_once 'credentials.php'; // Include the credentials file
 
+// Provjeri POST podatke i uradi preusmjeravanje prije HTML-a
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    
+    // Provjeri da li postoji korisničko ime i lozinka
+    if (isset($user_credentials[$username])) {
+        $stored_hash = $user_credentials[$username];
+        if (password_verify($password, $stored_hash)) {
+            $_SESSION['username'] = $username;
+            header("Location: dashboard.php");
+            exit;  // Prekida izvršavanje skripte nakon preusmjeravanja
+        } else {
+            $error_message = "Invalid password";
+        }
+    } else {
+        $error_message = "Invalid username";
+    }
+}
 ?> 
 
 <!DOCTYPE html>
@@ -19,16 +37,16 @@ require_once 'credentials.php'; // Include the credentials file
         background-image: url('img/city_pic.png'); /* Replace with your PNG file path */
         background-size: 100% auto; /* Scales with screen width */
         background-position: top center;
-  
-}
+        }
     </style>
 </head>
 <body>
 
-
     <div class="container">
+    <h2 class="text-center">Smart City</h2> 
+    <p class="text-center text-muted mb-4">Please log in to access the system</p>
         <div class="row justify-content-center">
-            <form class="aulaform was-validated"method="post" action="index.php">
+            <form class="aulaform was-validated" method="post" action="index.php">
                 
                 <div class="mb-3">
                     <label for="InputUsername" class="frm-label"></label>
@@ -41,27 +59,10 @@ require_once 'credentials.php'; // Include the credentials file
             </form>
         </div>
     </div>
+
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        
-        // Check if the username and password match
-        
-        if (isset($user_credentials[$username])) {
-            $stored_hash = $user_credentials[$username];
-            if (password_verify($password, $stored_hash)) {
-                $_SESSION['username'] = $username;
-                header("Location: dashboard.php");
-                exit;
-            }
-            else {
-                echo "<div class='alert alert-danger' role='alert'>Invalid password</div>";
-            }
-        }
-        else {
-            echo "<div class='alert alert-danger' role='alert'>Invalid username</div>";
-        }
+    if (isset($error_message)) {
+        echo "<div class='alert alert-danger' role='alert'>$error_message</div>";
     }
     ?>
     
