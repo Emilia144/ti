@@ -23,7 +23,7 @@ function renderSensorCard($sensorName) {
         <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary-emphasis">Sensor</strong>
-                <h3 class="mb-0">'.htmlspecialchars($label).': '.htmlspecialchars($value).'</h3>
+                <h3 class="mb-0">'.ucfirst(htmlspecialchars($label)).': '.htmlspecialchars($value).'</h3>
                 <br>
                 <div class="mb-1 text-body-secondary">Last update:</div>
                 <p class="card-text mb-auto">'.htmlspecialchars($time).'</p>
@@ -33,11 +33,7 @@ function renderSensorCard($sensorName) {
                 </a>
             </div>
             <div class="col-auto d-none d-lg-block">
-                <svg class="bd-placeholder-img" width="200" height="215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#55595c"/>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                </svg>
+                <img src="img/'.$sensorName.'.jpg" width="200" height="215" alt="'.htmlspecialchars($label).'" class="card-image-full">
             </div>
         </div>
     </div>';
@@ -64,11 +60,7 @@ function renderActuatorCard($actuatorName) {
                 </a>
             </div>
             <div class="col-auto d-none d-lg-block">
-                <svg class="bd-placeholder-img" width="200" height="215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#55595c"/>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                </svg>
+                <img src="img/'.$actuatorName.'.jpg" width="200" height="215" alt="'.htmlspecialchars($label).'" class="card-image-full">
             </div>
         </div>
     </div>';
@@ -91,16 +83,24 @@ function renderActuatorCard($actuatorName) {
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">IoT Platform</a>
-            
-
-
-            <button class="navbar-toggler" onclick="window.location.href='logout.php'" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                Logout
+                    <!-- Collapse button for menu (mobile) -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Menu and logout -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a href="logout.php" class="btn btn-outline-light">Logout</a>
+                </li>
+            </ul>
+            </div>
         </div>
     </nav>
     
-    <div class="container d-flex justify-content-around align-items-center">
+    <div class="container d-flex justify-content-around align-items-center" style="padding-bottom: 3%;">
         <div id="title-header">
           <h1>IoT Server</h1>
           <h6>user: <?php echo htmlspecialchars($username); ?></h6>

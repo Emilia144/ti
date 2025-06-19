@@ -2,7 +2,11 @@
     width: 350px;
     padding: 15px;;
 }
-
+div h2{
+    color: #007f6f;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
 .Sensor {
     background-color: #93baff;
@@ -12,3 +16,163 @@
     background-color: #ffbf6c;
 }
 
+/* Globalni stilovi */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #e3f9f1;  /* Svetlo tirkizna pozadina */
+    color: #333;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+/* Navigation */
+.navbar {
+    background: linear-gradient(90deg, #007f6f 0%, #00bfae 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.navbar-toggler {
+    color:black;
+}
+
+/* Hero section */
+#title-header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#title-header h1 {
+    font-size: 48px;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#title-header h6 {
+    color: #777;
+}
+img {
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Kartice senzora/aktuatora */
+.card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #007f6f;  /* Zeleni/tirkizni ton */
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-body {
+    background-color: #f7faf9;  /* Veoma svetla siva boja */
+}
+
+.card-text {
+    font-size: 14px;
+    color: #777;
+}
+
+.icon-link {
+    font-size: 14px;
+    color: #007f6f;
+    text-decoration: none;
+}
+
+.icon-link:hover {
+    color: #2c3e50;
+    text-decoration: underline;
+}
+
+/* Tabela */
+.table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+    background-color: #007f6f;  /* Zeleni/tirkizni ton */
+    color: white;
+    font-weight: bold;
+}
+
+.table td {
+    font-size: 14px;
+    color: #333;
+}
+
+.table .badge {
+    font-size: 12px;
+}
+
+/* Badges */
+.text-bg-danger {
+    background-color: #f05b5b !important;  /* Svetla crvena za upozorenje */
+}
+
+.text-bg-primary {
+    background-color: #00bfae !important;  /* Tirkizno-plava za normalno */
+}
+
+.text-bg-success {
+    background-color: #5cb85c !important;  /* Zeleni za aktivne */
+}
+
+
+.card-image-full {
+    margin: 0;
+    object-fit: cover;
+    display: block;
+}
+/*History btn*/
+.btn-back {
+    background-color: #00bfae;
+    color: white;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    text-decoration: none;
+}
+
+.btn-back:hover {
+    background-color: #007f6f;
+    color: rgb(0, 0, 0);
+}
+/* Responsivnost */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #title-header h1 {
+        font-size: 36px;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: auto;
+}
