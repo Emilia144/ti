@@ -91,6 +91,21 @@ $temperature_name = file_get_contents("api/files/temperature/name.txt");
                     </div>
                 </div>
             </div>
+            <div class="col-sm">
+                <div class="card text-center">
+                    <div class="card-header image">
+                        image
+                    </div>
+                    <div class="card-body">
+                        <?php echo "<img src='api/img/webcam.jpg?id=".time()."' style='width:100%'>"; ?>                        
+                    </div>
+                    <div class="card-footer">
+                        Last update: 2025-03-12 10:00 AM
+                        <br>
+                        <a href="#">View History</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         
