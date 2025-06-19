@@ -2,18 +2,29 @@
 session_start();
 require_once 'credentials.php'; // Include the credentials file
 
+<<<<<<< HEAD
+
+=======
 // Provjeri POST podatke i uradi preusmjeravanje prije HTML-a
+>>>>>>> 1ed845e3a69b7155ccec45e837e3d240d1789740
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
+<<<<<<< HEAD
+=======
     // Provjeri da li postoji korisničko ime i lozinka
+>>>>>>> 1ed845e3a69b7155ccec45e837e3d240d1789740
     if (isset($user_credentials[$username])) {
         $stored_hash = $user_credentials[$username];
         if (password_verify($password, $stored_hash)) {
             $_SESSION['username'] = $username;
             header("Location: dashboard.php");
+<<<<<<< HEAD
+            exit;  
+=======
             exit;  // Prekida izvršavanje skripte nakon preusmjeravanja
+>>>>>>> 1ed845e3a69b7155ccec45e837e3d240d1789740
         } else {
             $error_message = "Invalid password";
         }
