@@ -138,6 +138,19 @@ img {
     object-fit: cover;
     display: block;
 }
+/*History btn*/
+.btn-back {
+    background-color: #00bfae;
+    color: white;
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    text-decoration: none;
+}
+
+.btn-back:hover {
+    background-color: #007f6f;
+    color: rgb(0, 0, 0);
+}
 /* Responsivnost */
 @media (max-width: 768px) {
     .container {
