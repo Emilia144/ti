@@ -2,24 +2,6 @@
 session_start();
 require_once 'credentials.php'; // Include the credentials file
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    
-    if (isset($user_credentials[$username])) {
-        $stored_hash = $user_credentials[$username];
-        if (password_verify($password, $stored_hash)) {
-            $_SESSION['username'] = $username;
-            header("Location: dashboard.php");
-            exit;  
-        } else {
-            $error_message = "Invalid password";
-        }
-    } else {
-        $error_message = "Invalid username";
-    }
-}
 ?> 
 
 <!DOCTYPE html>
