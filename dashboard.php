@@ -156,7 +156,11 @@ function renderActuatorCard($actuatorName) {
                                 <td><?php echo sensorinfo('light', 'name')?> </td>
                                 <td id="light-value">Loading...</td>
                                 <td><?php echo sensorinfo('light', 'time')?></td>                  
-                                <td><span class="badge rounded-pill text-bg-danger">On</span></td>
+                                <td>
+                                    <span class="badge rounded-pill text-bg-warning">Lights On</span>
+                                    <span class="badge rounded-pill text-bg-info">manual</span>
+                                </td>
+
                             </tr>
                             <tr>
                                 <td><?php echo sensorinfo('temperature', 'name')?> </td>
@@ -209,6 +213,10 @@ function renderActuatorCard($actuatorName) {
     <form action="trigger_actuator.php" method="POST" style="display:inline;">
         <input type="hidden" name="command" value="OFF">
         <button class="btn btn-secondary">Turn OFF Warningsystem</button>
+    </form>
+<br><br>
+    <form>
+        <button class="btn btn-secondary">ENABLE automatic streetlight control</button>
     </form>
 </div>
 
