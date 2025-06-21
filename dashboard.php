@@ -110,10 +110,14 @@ function renderActuatorCard($actuatorName) {
 
     <div class="content container">
     <div class="row mb-2">
-      <?php renderSensorCard('humidity'); ?>
-      <?php renderActuatorCard('irrigationsystem'); ?>      
+      <?php renderSensorCard('temperature'); ?>
+      <?php renderActuatorCard('warningsystem'); ?>      
     </div>
 
+    <div class="row mb-2">
+      <?php renderSensorCard('humidity'); ?>
+      <?php renderActuatorCard('humidityalert'); ?>
+    </div>
 
     <div class="row mb-2">
       <?php renderSensorCard('light'); ?>
@@ -121,10 +125,6 @@ function renderActuatorCard($actuatorName) {
     </div>
 
 
-    <div class="row mb-2">
-      <?php renderSensorCard('airquality'); ?>
-      <?php renderActuatorCard('warningsystem'); ?>
-    </div>
   </div>
 
 
@@ -146,30 +146,113 @@ function renderActuatorCard($actuatorName) {
                                 <th scope="col">State of alert</th>
                             </tr>
                         </thead>
+                       <?php
+                        $temperatureAlert = trim(file_get_contents("api/files/warningsystem/value.txt"));
+                        $humidityAlert = trim(file_get_contents("api/files/humidityalert/value.txt"));
+                        ?>
+
                         <tbody>
                             <tr>
                                 <td><?php echo sensorinfo('light', 'name')?> </td>
-                                <td><?php echo sensorinfo('light', 'value')?></td>
-                                <td><?php echo sensorinfo('light', 'time')?></td>
-                                <td><span class="badge rounded-pill text-bg-danger">Danger</span></td>
+                                <td id="light-value">Loading...</td>
+                                <td><?php echo sensorinfo('light', 'time')?></td>                  
+                                <td><span class="badge rounded-pill text-bg-danger">On</span></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo sensorinfo('temperature', 'name')?> </td>
+                                <td id="temperature-value">Loading...</td>
+                                <td><?php echo sensorinfo('temperature', 'time')?></td>
+                                <td>
+                                    <?php
+                                        if ($temperatureAlert === "COLD") {
+                                            echo '<span class="badge rounded-pill text-bg-info">Cold</span>';
+                                        } elseif ($temperatureAlert === "MODERATE") {
+                                            echo '<span class="badge rounded-pill text-bg-warning">Moderate</span>';
+                                        } elseif ($temperatureAlert === "HOT") {
+                                            echo '<span class="badge rounded-pill text-bg-danger">Hot</span>';
+                                        } else {
+                                            echo '<span class="badge rounded-pill text-bg-secondary">Unknown</span>';
+                                        }
+                                    ?>
+                                </td>
+
                             </tr>
                             <tr>
                                 <td><?php echo sensorinfo('humidity', 'name')?> </td>
-                                <td><?php echo sensorinfo('humidity', 'value')?></td>
+                                <td id="humidity-value">Loading...</td>
                                 <td><?php echo sensorinfo('humidity', 'time')?></td>
-                                <td><span class="badge rounded-pill text-bg-primary">Normal</span></td>
+                                <td>
+                                    <?php
+                                        if ($humidityAlert === "LOW") {
+                                            echo '<span class="badge rounded-pill text-bg-warning">Low</span>';
+                                        } elseif ($humidityAlert === "NORMAL") {
+                                            echo '<span class="badge rounded-pill text-bg-success">Normal</span>';
+                                        } elseif ($humidityAlert === "HIGH") {
+                                            echo '<span class="badge rounded-pill text-bg-danger">High</span>';
+                                        } else {
+                                            echo '<span class="badge rounded-pill text-bg-secondary">Unknown</span>';
+                                        }
+                                    ?>
+                                </td>
                             </tr>
-                            <tr>
-                                <td><?php echo sensorinfo('airquality', 'name')?> </td>
-                                <td><?php echo sensorinfo('airquality', 'value')?></td>
-                                <td><?php echo sensorinfo('airquality', 'time')?></td>
-                                <td><span class="badge rounded-pill text-bg-success">Active</span></td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
             </div>
-        
+       <div class="text-center mt-4">
+    <form action="trigger_actuator.php" method="POST" style="display:inline;">
+        <input type="hidden" name="command" value="ON">
+        <button class="btn btn-danger">Turn ON Warningsystem</button>
+    </form>
+
+    <form action="trigger_actuator.php" method="POST" style="display:inline;">
+        <input type="hidden" name="command" value="OFF">
+        <button class="btn btn-secondary">Turn OFF Warningsystem</button>
+    </form>
+</div>
+
     </div>
+    <div class="container text-center mt-5">
+    <h3>Last captured image</h3>
+    <img src="img/webcam.jpg?<?php echo time(); ?>" alt="Webcam Image" width="400">
+    <form action="trigger_python.php" method="POST">
+        <button type="submit" name="capture" value="1" class="btn btn-info">Take Webcam Snapshot</button>
+    </form>
+    <div class="container text-center my-5">
+    <a href="image_history.php" class="btn btn-outline-secondary btn-lg">
+        📸 View Image History
+    </a>
+</div>
+
+
+</div>
+<script>
+function fetchSensorData() {
+    fetch('get_temperature.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("temperature-value").innerText = data;
+        });
+
+    fetch('get_humidity.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("humidity-value").innerText = data;
+        });
+    fetch('get_lights.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("light-value").innerText = data;
+        });    
+}
+
+// start now
+fetchSensorData();
+
+// update every 5 seconds
+setInterval(fetchSensorData, 5000);
+</script>
+
   </body>
 </html>

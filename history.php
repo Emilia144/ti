@@ -76,16 +76,18 @@ $lines = file($logPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    foreach ($lines as $line) {
-                        $parts = explode(";", $line);
-                        if (count($parts) === 2) {
-                            $time = trim($parts[0]);
-                            $value = trim($parts[1]);
-                            echo "<tr><td>$time</td><td>$value</td></tr>";
-                        }
-                    }
-                    ?>
+                   <?php
+foreach ($lines as $line) {
+    $parts = explode(";", $line);
+    if (count($parts) === 2) {
+        $time = trim($parts[0]);
+        $value = trim($parts[1]);
+
+        echo "<tr><td>$time</td><td>$value</td></tr>";
+    }
+}
+?>
+
                 </tbody>
             </table>
         </div>

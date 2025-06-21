@@ -1,26 +1,38 @@
 <?php
-// d) Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
+    $allowed_types = ['image/jpeg', 'image/png'];
+    $max_size = 1000000; // 1000kB
 
-    // e) Check if the 'image' element exists in the $_FILES array
-    if (isset($_FILES['image'])) {
-        // Print the contents of the uploaded file's array
-        
-        print_r($_FILES['image']);
-        $destination = 'img/webcam.jpg';
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
-            echo "Image uploaded successfully to $destination.";
-        } else {
-            echo "Error: Failed to move the uploaded file.";
-        }
-        
-    } else {
-        // 'image' key not found in uploaded files
-        echo "Error: No file uploaded with the name 'image'.";
+    $image = $_FILES['image'];
+
+    // Check for upload errors
+    if ($image['error'] !== UPLOAD_ERR_OK) {
+        die("Upload error.");
     }
 
+    // Validate file type and size
+    if (!in_array($image['type'], $allowed_types)) {
+        die("Invalid file type.");
+    }
+
+    if ($image['size'] > $max_size) {
+        die("File too large.");
+    }
+
+    $target_dir = "img/";
+    if (!file_exists($target_dir)) {
+        mkdir($target_dir, 0777, true);
+    }
+
+    $filename = basename($image['name']);
+    $destination = $target_dir . $filename;
+
+    if (move_uploaded_file($image['tmp_name'], $destination)) {
+        echo "Image uploaded successfully to $destination.";
+    } else {
+        echo "Failed to save image.";
+    }
 } else {
-    // Request method is not POST
-    echo "Error: This endpoint only accepts POST requests.";
+    echo "Invalid request.";
 }
 ?>
